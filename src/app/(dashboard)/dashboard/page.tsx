@@ -1,42 +1,33 @@
-"use client"
 import {
     DashboardPage,
     DashboardPageHeader,
+    DashboardPageHeaderNav,
     DashboardPageHeaderTitle,
     DashboardPageMain,
 } from '@/components/dashboard/page'
-
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
-
-import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import CardDashboard from '@/components/dashboard/card_Dashboard'
-
-const chartData = [
-    { month: "January", desktop: 186, mobile: 80 },
-    { month: "February", desktop: 305, mobile: 200 },
-    { month: "March", desktop: 237, mobile: 120 },
-    { month: "April", desktop: 73, mobile: 190 },
-    { month: "May", desktop: 209, mobile: 130 },
-    { month: "June", desktop: 214, mobile: 140 },
-]
-
-const chartConfig = {
-    desktop: {
-        label: "Desktop",
-        color: "#2563eb",
-    },
-    mobile: {
-        label: "Mobile",
-        color: "#60a5fa",
-    },
-} satisfies ChartConfig
+import GraficoComponent01 from '@/components/dashboard/grafico_01'
+import GraficoComponent02 from '@/components/dashboard/grafico_02'
+import { Button } from '@/components/ui/button'
+import { PlusIcon } from 'lucide-react'
+import Link from 'next/link'
 
 export default async function Page() {
 
     return (
         <DashboardPage>
             <DashboardPageHeader>
-                <DashboardPageHeaderTitle>Criar Usuário</DashboardPageHeaderTitle>
+                <DashboardPageHeaderTitle className='flex justify-between'>
+                    Principal
+                </DashboardPageHeaderTitle>
+                <DashboardPageHeaderNav>
+                    <DashboardPageHeaderNav>
+                        <Button variant="outline" size="sm">
+                            <PlusIcon className="w-4 h-4 mr-3" />
+                            <Link href="/dashboard/caduser">Médium</Link>
+                        </Button>
+                    </DashboardPageHeaderNav>
+                </DashboardPageHeaderNav>
             </DashboardPageHeader>
             <DashboardPageMain>
                 <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
@@ -65,30 +56,14 @@ export default async function Page() {
                         nome_paragrafo='Médiuns em atrazo'
                     />
                 </div>
-                <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-flow-row">
-                    <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
-                        <BarChart accessibilityLayer data={chartData}>
-                            {/* Linha Cartesiana */}
-                            <CartesianGrid vertical={false} />
-                            {/* Legenda na lina X */}
-                            <XAxis
-                                dataKey="month"
-                                tickLine={false}
-                                tickMargin={10}
-                                axisLine={false}
-                                tickFormatter={(value) => value.slice(0, 3)}
-                            />
-                            {/* Legenda na Nos blocos */}
-                            <ChartTooltip content={<ChartTooltipContent />} />
-                            {/* Legenda das cores dos blocos */}
-                            <ChartLegend content={<ChartLegendContent />} />
-                            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-                            <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
-                        </BarChart>
-                    </ChartContainer>
+                <div className="flex w-full h-40">
+                    <GraficoComponent01 />
                 </div>
-            </DashboardPageMain>
-        </DashboardPage>
+                <div className="flex w-full h-40 mt-10">
+                    <GraficoComponent02 />
+                </div>
+            </DashboardPageMain >
+        </DashboardPage >
     )
 }
 

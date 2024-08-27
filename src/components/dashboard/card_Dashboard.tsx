@@ -1,3 +1,4 @@
+"use client"
 import {
     Card,
     CardContent,
@@ -6,9 +7,6 @@ import {
 }
     from '@/components/ui/card'
 import {
-    ThumbsDownIcon,
-    ThumbsUpIcon,
-    UserCheck,
     Users
 }
     from 'lucide-react'
